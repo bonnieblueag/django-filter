@@ -68,6 +68,8 @@ def filters_for_model(model, fields=None, exclude=None, filter_for_field=None,
             if not isinstance(f, models.AutoField) and
             not (getattr(remote_field(f), 'parent_link', False))
         ]
+    elif len(fields) > 0 && not isinstance(fields[0], str):
+        fields = [f.name for f in fields]
     # Loop through the list of fields.
     for f in fields:
         # Skip the field if excluded.
